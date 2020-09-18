@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://BXJC.github.io</id>
     <title>冲冲冲</title>
-    <updated>2020-09-11T07:11:21.440Z</updated>
+    <updated>2020-09-18T02:46:55.142Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://BXJC.github.io"/>
     <link rel="self" href="https://BXJC.github.io/atom.xml"/>
@@ -11,7 +11,28 @@
     <icon>https://BXJC.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 冲冲冲</rights>
     <entry>
-        <title type="html"><![CDATA[Machine Learning in Coursera]]></title>
+        <title type="html"><![CDATA[Logistic Regression]]></title>
+        <id>https://BXJC.github.io/NcqM6qkca/</id>
+        <link href="https://BXJC.github.io/NcqM6qkca/">
+        </link>
+        <updated>2020-09-18T02:38:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="逻辑回归">逻辑回归</h1>
+<p>逻辑回归，分类算法</p>
+<h2 id="目标">目标</h2>
+<p>将给定的样本进行分类。</p>
+<p>通过假设函数<img src="https://BXJC.github.io/post-images/1600396918221.png" alt="" loading="lazy">对样本进行拟合，再通过代入<em>sigmoid</em>激活函数划分决策边界。最终得到分类结果。</p>
+<h2 id="实现">实现</h2>
+<p><em>sigmoid</em>函数（<em>logistic</em>函数）：1/(1+e^-z)</p>
+<p>代价函数：<br>
+<img src="https://BXJC.github.io/post-images/1600397027512.png" alt="" loading="lazy"><br>
+注：该函数由极大似然估计所得出，并且具有凸函数性质</p>
+<p>梯度下降函数：<br>
+<img src="https://BXJC.github.io/post-images/1600397082702.png" alt="" loading="lazy"><br>
+注：所有的<em>θ</em>需要同时更新。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[机器学习基础]]></title>
         <id>https://BXJC.github.io/shi-yong-zhi-nan/</id>
         <link href="https://BXJC.github.io/shi-yong-zhi-nan/">
         </link>

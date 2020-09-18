@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>机器学习基础 | 冲冲冲</title>
+<title>Logistic Regression | 冲冲冲</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,14 +24,16 @@
 
 
 
-    <meta name="description" content="机器学习可以分为两个大类：
-监督学习和无监督学习
-监督学习
-监督学习，给出算法的数据集，并且我们知道正确的输出应该是什么样子的，我们能够得到正确的输入与输出之间的关系。
-例如：
+    <meta name="description" content="逻辑回归
+逻辑回归，分类算法
+目标
+将给定的样本进行分类。
+通过假设函数对样本进行拟合，再通过代入sigmoid激活函数划分决策边界。最终得到分类结果。
+实现
+sigmoid函数（logistic函数）：1/(1+e^-z)
+代价函数：
 
-
-给出房子的数据集，房子的属性包括面积和价格，我们会通过建立..." />
+..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -92,41 +94,35 @@ Email: zyzhang0109@gmail.com | <a class="rss" href="https://BXJC.github.io/atom.
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">机器学习基础</h2>
-            <div class="post-date">2020-09-07</div>
+            <h2 class="post-title">Logistic Regression</h2>
+            <div class="post-date">2020-09-18</div>
             
             <div class="post-content" v-pre>
-              <p>机器学习可以分为两个大类：</p>
-<p>监督学习和无监督学习</p>
-<h3 id="监督学习">监督学习</h3>
-<p>监督学习，给出算法的数据集，并且<strong>我们知道正确的输出应该是什么样子的</strong>，我们能够得到正确的输入与输出之间的关系。</p>
-<p>例如：</p>
-<ul>
-<li>
-<p>给出房子的数据集，房子的属性包括面积和价格，我们会通过建立算法来确定多少面积的房子适合怎么样的价格。</p>
-</li>
-<li>
-<p>给出肿瘤的数据集，肿瘤的属性包括肿瘤大小和肿瘤类型，通过建立算法来确定该大小的肿瘤应该属于良性还是恶性。</p>
-</li>
-</ul>
-<p>以上两种情形即属于监督学习范畴，第一种被称为<strong>回归</strong>，第二种被称为<strong>分类</strong>，都是典型的监督学习范畴。</p>
-<h3 id="无监督学习">无监督学习</h3>
-<p>无监督学习，给出算法的数据集，但是<strong>数据之间没有明显的区分</strong>。我们<strong>不知道我们得到的结果会是什么样的</strong>，我们企图从数据中获取结构，不必知道变量的影响。</p>
-<p>我们可以通过变量间的关系对数据进行<strong>聚类</strong>来推导结构，但是这个过程中<strong>没有基于结果的反馈</strong>。</p>
-<p>例如：</p>
-<ul>
-<li>
-<p>给出许多基因的集合，我们需要找到一个方法来自动将这些基因进行归类、分组，可以使用不同的判别标准，如生命周期、位置等等。</p>
-</li>
-<li>
-<p>鸡尾酒会算法，即在鸡尾酒会中从一连串的声音中分辨出人声和音乐。</p>
-</li>
-</ul>
-<p>无监督学习主要解决聚类问题。</p>
-<p>​</p>
+              <h1 id="逻辑回归">逻辑回归</h1>
+<p>逻辑回归，分类算法</p>
+<h2 id="目标">目标</h2>
+<p>将给定的样本进行分类。</p>
+<p>通过假设函数<img src="https://BXJC.github.io/post-images/1600396918221.png" alt="" loading="lazy">对样本进行拟合，再通过代入<em>sigmoid</em>激活函数划分决策边界。最终得到分类结果。</p>
+<h2 id="实现">实现</h2>
+<p><em>sigmoid</em>函数（<em>logistic</em>函数）：1/(1+e^-z)</p>
+<p>代价函数：<br>
+<img src="https://BXJC.github.io/post-images/1600397027512.png" alt="" loading="lazy"><br>
+注：该函数由极大似然估计所得出，并且具有凸函数性质</p>
+<p>梯度下降函数：<br>
+<img src="https://BXJC.github.io/post-images/1600397082702.png" alt="" loading="lazy"><br>
+注：所有的<em>θ</em>需要同时更新。</p>
 
             </div>
             
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://BXJC.github.io/shi-yong-zhi-nan/">
+                  <h3 class="post-title">
+                    机器学习基础
+                  </h3>
+                </a>
+              </div>
             
 
             
