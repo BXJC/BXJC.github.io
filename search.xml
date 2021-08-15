@@ -3,7 +3,13 @@
   <entry>
     <title>test</title>
     <url>/posts/d87f7e0c/</url>
-    <content><![CDATA[<p>测试文档。</p>
-]]></content>
+    <content><![CDATA[<h2 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h2><h5 id=""><a href="#" class="headerlink" title=""></a></h5>]]></content>
+      <categories>
+        <category>图神经网络</category>
+      </categories>
+      <tags>
+        <tag>图神经网络</tag>
+        <tag>语义搜索</tag>
+      </tags>
   </entry>
 </search>
