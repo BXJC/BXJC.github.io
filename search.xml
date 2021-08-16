@@ -3,7 +3,9 @@
   <entry>
     <title>test</title>
     <url>/posts/d87f7e0c/</url>
-    <content><![CDATA[<h2 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h2><h5 id=""><a href="#" class="headerlink" title=""></a></h5>]]></content>
+    <content><![CDATA[<h2 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>图神经网络</category>
       </categories>
