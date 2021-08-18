@@ -3020,14 +3020,14 @@ body {
   background-image: url("https://res.cloudinary.com/dgmic3q9w/image/upload/v1629253226/Blog/other/Leaf_hm6tak.svg");
   background-position: 0 -6px;
   border-top: 1px solid #ccc;
-  top: -20px;
+  top: -30px;
   height: 28px;
 }
 .blockquote-center::after {
   background-image: url("https://res.cloudinary.com/dgmic3q9w/image/upload/v1629253226/Blog/other/Leaf_hm6tak.svg");
   background-position: 100% 8px;
   border-bottom: 1px solid #ccc;
-  bottom: -20px;
+  bottom: -30px;
   height: 30px;
 }
 .blockquote-center::before,
