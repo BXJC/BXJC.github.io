@@ -206,6 +206,107 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo站点基本配置与实用工具指北</title>
+    <url>/posts/4245bf3f/</url>
+    <content><![CDATA[<h3 id="读前须知">读前须知</h3>
+<p>阅读该文章时，应该已经完成博客站的初始化配置，若未进行初始化配置，请阅读前置文章<a href="https://bxjc.github.io/posts/1be4704e/">Hexo + Github Pages建站指北</a>。</p>
+<p>由于不同版本环境配置不尽相同，先贴出我使用的系统环境如下：</p>
+<ul>
+<li>Hexo: 5.4.0</li>
+<li>Git: 2.29.2.windows.3</li>
+<li>Node.js: 15.4.0</li>
+</ul>
+<h3 id="站点配置文件详解">站点配置文件详解</h3>
+<p>主要修改站点配置文件 <code>_config.yml</code> 来实现个性化。</p>
+<h4 id="网站基本信息">网站基本信息</h4>
+<p>网站基本信息修改的字段如下图所示：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="comment"># 网站标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="comment"># 网站副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="comment"># 网站描述</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="comment"># 网站关键词，支持多个关键词</span></span><br><span class="line"><span class="attr">author:</span> <span class="comment"># 作者名称</span></span><br><span class="line"><span class="attr">languages:</span> <span class="comment"># 语言，中文采用zh-CN, 英文采用en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="comment"># 中国大陆地区采用&quot;Asia/Shanghai&quot;，注意城市不能随意修改</span></span><br></pre></td></tr></table></figure>
+<h4 id="url配置">URL配置</h4>
+<p>主要用于站点链接配置。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://username.github.io/project</span> <span class="comment"># 替换自己的用户名即可</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span> <span class="comment"># 保持不变</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> <span class="comment"># 网站的永久链接，可根据自己的喜好调整</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+<p>由于我们写文章时title可能含有中文，因此会生成含有中文的url，这会造成许多不可预料的问题。于是采用另外的方式来生成永久链接。</p>
+<p>首先键入以下命令安装相应插件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+<p>接着修改站点配置文件 <code>_config.yml</code> 中的 <code>permalink</code> 字段。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   # 算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     # 进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
+<p>这样就完成了永久链接的修改，文章在发布时会被自动分配16进制代码。</p>
+<h4 id="写作配置">写作配置</h4>
+<p>主要在新建与发布文章时使用。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">new_post_name:</span> <span class="string">title.md</span> <span class="comment"># 新建post时的文件名</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span> <span class="comment"># 默认采用模板</span></span><br><span class="line"><span class="attr">highlight:</span> <span class="comment"># 高亮设置</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">auto_detect:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tab_replace:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hljs:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h4 id="翻页配置">翻页配置</h4>
+<p>主要用于控制文章排序以及每页显示的数量。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="attr">index_generator:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">&#x27;&#x27;</span> <span class="comment"># 用于设置站点根目录，一般不用修改</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="number">10</span> <span class="comment"># 每页显示的文章数量，建议10或12，0表示所有文章平铺</span></span><br><span class="line">  <span class="attr">order_by:</span> <span class="string">-date</span> <span class="comment"># 排序依据，默认为发布时间降序</span></span><br></pre></td></tr></table></figure>
+<h4 id="部署配置">部署配置</h4>
+<p>主要用于连接GitHub，设置推送的远程仓库。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span> <span class="comment"># 统一填写git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:BXJC/BXJC.github.io.git</span> <span class="comment"># 输入自己的repo地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span> <span class="comment"># 选择仓库中的默认分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="站点页面初始化">站点页面初始化</h3>
+<p>在站点配置文件修改完成后，网站的tags、categories等页面仍无法正确跳转，需要进行页面初始化配置。</p>
+<h4 id="新建标签页面">新建标签页面</h4>
+<p>在Git Bash里键入以下命令：</p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="type">page</span> <span class="string">&quot;tags&quot;</span></span><br></pre></td></tr></table></figure>
+<p>此时，hexo会在 <code>Hexo/source/</code> 下创建一个tags目录，并在其中放置index.md文件。</p>
+<p>打开index.md文件，修改其meta属性，添加如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">&quot;tags&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在本地调试后，即可发现tags页面跳转正常。</p>
+<p>在文章写作过程中，可以在meta数据中的tags字段后添加<code>[]</code>来放置tags，支持多个标签，每个标签之间使用半角英文逗号分割,如：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">tags:</span> [<span class="string">Hexo</span>, <span class="string">Next</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="新建分类页面">新建分类页面</h4>
+<p>在Git Bash里键入以下命令：</p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="type">page</span> <span class="string">&quot;categories&quot;</span></span><br></pre></td></tr></table></figure>
+<p>此时，hexo会在 <code>Hexo/source/</code> 下创建一个categories目录，并在其中放置index.md文件。</p>
+<p>打开index.md文件，修改其meta属性，添加如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">&quot;categories&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在本地调试后，即可发现categories页面跳转正常。</p>
+<p>在文章写作过程中，可以在meta数据中添加categories字段，仅支持单个分类，如：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">Hexo</span></span><br></pre></td></tr></table></figure>
+<h4 id="新建文章">新建文章</h4>
+<p>站点基本配置完毕，我们可以开始写作自己的文章啦！</p>
+<p>打开Git Bash，键入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>该命令会在<code>Hexo/source/_post</code> 目录下新建名为title.md的文件，打开该文件即可进行写作。</p>
+<p>本地调试后，即可在网站中找到自己刚刚写作的文章。</p>
+<h4 id="文章草稿及发布">文章草稿及发布</h4>
+<p>如果不想在部署时让自己还未写完的文章也被发布，即可通过以下命令新建草稿。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new draft <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>该命令会在<code>Hexo/source/_draft</code> 目录下新建名为title.md的文件，打开该文件即可进行写作。当本地调试或部署至服务器时，默认无法查找到草稿，即不会发布草稿文章。</p>
+<p>在文章写作完毕后，需要将其移动至post文件夹，采用以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo publish <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>该命令会将 <code>Hexo/source/_draft</code> 目录下对应的文章移动至 <code>Hexo/source/_post</code> 目录，再次本地调试或部署后即可找到该文章。</p>
+<h3 id="实用工具">实用工具</h3>
+<h4 id="数学公式的支持">数学公式的支持</h4>
+<p>Hexo采用的默认markdown渲染器对于复杂数学公式的支持不够完美，在渲染latex公式时会出现渲染错误，如将 <code>_</code> 识别为markdown斜体标识，从而导致公式渲染失败。</p>
+<p><strong>解决方案：</strong>采用hexo-renderer-pandoc作为新的渲染器，该插件可以完美解决上述问题。</p>
+<p><strong>具体步骤</strong>：</p>
+<ol type="1">
+<li><p>由于hexo-renderer-pandoc需要Pandoc的支持，故需要先安装Pandoc，进入<a href="https://github.com/jgm/pandoc/releases/tag/2.14.1">链接</a>安装即可。这里选择windows-x86_64.msi的版本。</p></li>
+<li><p>在Pandoc安装完毕后，回到Git Bash，键入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pandoc -v</span></span><br></pre></td></tr></table></figure>
+<p>若正确显示版本号即可进行下一步，若返回未找到该命令，则检查系统环境变量后重启电脑即可。</p></li>
+<li><p>卸载默认的渲染器并安装对应插件。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-renderer-marked --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-renderer-pandoc --save</span></span><br></pre></td></tr></table></figure></li>
+<li><p>安装mathJax。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-filter-mathjax --save</span></span><br></pre></td></tr></table></figure></li>
+<li><p>进入站点配置文件，添加如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or &#x27;ams&#x27; or &#x27;all&#x27;</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br><span class="line">  <span class="attr">append_css:</span> <span class="literal">true</span> <span class="comment"># add CSS to pages rendered by MathJax</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span> <span class="comment"># 如果设置为true,默认每篇文章都会被mathjax渲染</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo-renderer-pandoc (https://github.com/wzpan/hexo-renderer-pandoc)</span></span><br><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">extra:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">toc:</span> <span class="comment"># will be passed as `--toc`. Note the colon，如果不需要自动生成目录无需添加此行</span></span><br><span class="line">  <span class="attr">extensions:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;+hard_line_breaks&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;+emoji&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;-implicit_figures&#x27;</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">     <span class="string">./pandoc_template.html</span> <span class="comment"># 如果不需要自动生成目录无需添加此行</span></span><br><span class="line"><span class="comment"># -----------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+<p>若上文中 <code>every_page</code> 字段设为false，则需在每篇文章的meta数据中添加 <code>mathjax: true</code>字段，即可开启公式渲染。</p></li>
+<li><p>进入NexT主题配置文件(NexT安装请参照<a href="https://bxjc.github.io/posts/5ab2d68d/">Hexo + Next深度美化指北</a>)，并搜索 <code>math</code> 字段，修改如下：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="comment"># Default (false) will load mathjax / katex script on demand.</span></span><br><span class="line">  <span class="comment"># That is it only render those page which has `mathjax: true` in front-matter.</span></span><br><span class="line">  <span class="comment"># If you set it to true, it will load mathjax / katex srcipt EVERY PAGE.</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
+<li><p>回到Git Bash，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
+<p>即可在本地看到公式被成功渲染。</p>
+<p>（公式的支持真的是个大坑，花了我半天时间查阅资料T_T）</p></li>
+</ol>
+<h3 id="结语">结语</h3>
+<p>本文章实用工具篇仍会不断更新，敬请大家持续关注！有关问题可以在侧边栏的微信链接联系我。后续会发布<a href="https://bxjc.github.io/posts/5ab2d68d/">Hexo + Next深度美化指北</a>，干货满满，敬请关注！</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RDF入门(一)</title>
     <url>/posts/14a66d87/</url>
     <content><![CDATA[<h3 id="rdf简介">RDF简介</h3>
@@ -346,215 +447,6 @@
 <p>RDF允许来组任何源的三元组数据组合到图形中，并将其作为合法的RDF数据进行处理。数据集正在以RDF格式进行发布和互连，并且许多都可以通过SPARQL进行查询。</p>
 <h3 id="总结">总结</h3>
 <p>RDF提供了一个通用的资源框架，以供应用程序在Web上搜索、查询、发布一系列资源和数据。这样通用的资源框架为资源的管理提供了极大的方便和通用的方式，支持在不同应用之间进行传递而不失去信息。</p>
-]]></content>
-      <categories>
-        <category>语义搜索</category>
-      </categories>
-      <tags>
-        <tag>语义搜索</tag>
-        <tag>RDF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo站点基本配置与实用工具指北</title>
-    <url>/posts/4245bf3f/</url>
-    <content><![CDATA[<h3 id="读前须知">读前须知</h3>
-<p>阅读该文章时，应该已经完成博客站的初始化配置，若未进行初始化配置，请阅读前置文章<a href="https://bxjc.github.io/posts/1be4704e/">Hexo + Github Pages建站指北</a>。</p>
-<p>由于不同版本环境配置不尽相同，先贴出我使用的系统环境如下：</p>
-<ul>
-<li>Hexo: 5.4.0</li>
-<li>Git: 2.29.2.windows.3</li>
-<li>Node.js: 15.4.0</li>
-</ul>
-<h3 id="站点配置文件详解">站点配置文件详解</h3>
-<p>主要修改站点配置文件 <code>_config.yml</code> 来实现个性化。</p>
-<h4 id="网站基本信息">网站基本信息</h4>
-<p>网站基本信息修改的字段如下图所示：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="comment"># 网站标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="comment"># 网站副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="comment"># 网站描述</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="comment"># 网站关键词，支持多个关键词</span></span><br><span class="line"><span class="attr">author:</span> <span class="comment"># 作者名称</span></span><br><span class="line"><span class="attr">languages:</span> <span class="comment"># 语言，中文采用zh-CN, 英文采用en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="comment"># 中国大陆地区采用&quot;Asia/Shanghai&quot;，注意城市不能随意修改</span></span><br></pre></td></tr></table></figure>
-<h4 id="url配置">URL配置</h4>
-<p>主要用于站点链接配置。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://username.github.io/project</span> <span class="comment"># 替换自己的用户名即可</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span> <span class="comment"># 保持不变</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> <span class="comment"># 网站的永久链接，可根据自己的喜好调整</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
-<p>由于我们写文章时title可能含有中文，因此会生成含有中文的url，这会造成许多不可预料的问题。于是采用另外的方式来生成永久链接。</p>
-<p>首先键入以下命令安装相应插件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-<p>接着修改站点配置文件 <code>_config.yml</code> 中的 <code>permalink</code> 字段。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   # 算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     # 进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
-<p>这样就完成了永久链接的修改，文章在发布时会被自动分配16进制代码。</p>
-<h4 id="写作配置">写作配置</h4>
-<p>主要在新建与发布文章时使用。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">new_post_name:</span> <span class="string">title.md</span> <span class="comment"># 新建post时的文件名</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span> <span class="comment"># 默认采用模板</span></span><br><span class="line"><span class="attr">highlight:</span> <span class="comment"># 高亮设置</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">auto_detect:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">tab_replace:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hljs:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h4 id="翻页配置">翻页配置</h4>
-<p>主要用于控制文章排序以及每页显示的数量。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="attr">index_generator:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">&#x27;&#x27;</span> <span class="comment"># 用于设置站点根目录，一般不用修改</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="number">10</span> <span class="comment"># 每页显示的文章数量，建议10或12，0表示所有文章平铺</span></span><br><span class="line">  <span class="attr">order_by:</span> <span class="string">-date</span> <span class="comment"># 排序依据，默认为发布时间降序</span></span><br></pre></td></tr></table></figure>
-<h4 id="部署配置">部署配置</h4>
-<p>主要用于连接GitHub，设置推送的远程仓库。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span> <span class="comment"># 统一填写git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:BXJC/BXJC.github.io.git</span> <span class="comment"># 输入自己的repo地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span> <span class="comment"># 选择仓库中的默认分支</span></span><br></pre></td></tr></table></figure>
-<h3 id="站点页面初始化">站点页面初始化</h3>
-<p>在站点配置文件修改完成后，网站的tags、categories等页面仍无法正确跳转，需要进行页面初始化配置。</p>
-<h4 id="新建标签页面">新建标签页面</h4>
-<p>在Git Bash里键入以下命令：</p>
-<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="type">page</span> <span class="string">&quot;tags&quot;</span></span><br></pre></td></tr></table></figure>
-<p>此时，hexo会在 <code>Hexo/source/</code> 下创建一个tags目录，并在其中放置index.md文件。</p>
-<p>打开index.md文件，修改其meta属性，添加如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">&quot;tags&quot;</span></span><br></pre></td></tr></table></figure>
-<p>在本地调试后，即可发现tags页面跳转正常。</p>
-<p>在文章写作过程中，可以在meta数据中的tags字段后添加<code>[]</code>来放置tags，支持多个标签，每个标签之间使用半角英文逗号分割,如：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">tags:</span> [<span class="string">Hexo</span>, <span class="string">Next</span>]</span><br></pre></td></tr></table></figure>
-<h4 id="新建分类页面">新建分类页面</h4>
-<p>在Git Bash里键入以下命令：</p>
-<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="type">page</span> <span class="string">&quot;categories&quot;</span></span><br></pre></td></tr></table></figure>
-<p>此时，hexo会在 <code>Hexo/source/</code> 下创建一个categories目录，并在其中放置index.md文件。</p>
-<p>打开index.md文件，修改其meta属性，添加如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">&quot;categories&quot;</span></span><br></pre></td></tr></table></figure>
-<p>在本地调试后，即可发现categories页面跳转正常。</p>
-<p>在文章写作过程中，可以在meta数据中添加categories字段，仅支持单个分类，如：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">categories:</span> <span class="string">Hexo</span></span><br></pre></td></tr></table></figure>
-<h4 id="新建文章">新建文章</h4>
-<p>站点基本配置完毕，我们可以开始写作自己的文章啦！</p>
-<p>打开Git Bash，键入以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>该命令会在<code>Hexo/source/_post</code> 目录下新建名为title.md的文件，打开该文件即可进行写作。</p>
-<p>本地调试后，即可在网站中找到自己刚刚写作的文章。</p>
-<h4 id="文章草稿及发布">文章草稿及发布</h4>
-<p>如果不想在部署时让自己还未写完的文章也被发布，即可通过以下命令新建草稿。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new draft <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>该命令会在<code>Hexo/source/_draft</code> 目录下新建名为title.md的文件，打开该文件即可进行写作。当本地调试或部署至服务器时，默认无法查找到草稿，即不会发布草稿文章。</p>
-<p>在文章写作完毕后，需要将其移动至post文件夹，采用以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo publish <span class="string">&quot;title&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>该命令会将 <code>Hexo/source/_draft</code> 目录下对应的文章移动至 <code>Hexo/source/_post</code> 目录，再次本地调试或部署后即可找到该文章。</p>
-<h3 id="实用工具">实用工具</h3>
-<h4 id="数学公式的支持">数学公式的支持</h4>
-<p>Hexo采用的默认markdown渲染器对于复杂数学公式的支持不够完美，在渲染latex公式时会出现渲染错误，如将 <code>_</code> 识别为markdown斜体标识，从而导致公式渲染失败。</p>
-<p><strong>解决方案：</strong>采用hexo-renderer-pandoc作为新的渲染器，该插件可以完美解决上述问题。</p>
-<p><strong>具体步骤</strong>：</p>
-<ol type="1">
-<li><p>由于hexo-renderer-pandoc需要Pandoc的支持，故需要先安装Pandoc，进入<a href="https://github.com/jgm/pandoc/releases/tag/2.14.1">链接</a>安装即可。这里选择windows-x86_64.msi的版本。</p></li>
-<li><p>在Pandoc安装完毕后，回到Git Bash，键入以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pandoc -v</span></span><br></pre></td></tr></table></figure>
-<p>若正确显示版本号即可进行下一步，若返回未找到该命令，则检查系统环境变量后重启电脑即可。</p></li>
-<li><p>卸载默认的渲染器并安装对应插件。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-renderer-marked --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-renderer-pandoc --save</span></span><br></pre></td></tr></table></figure></li>
-<li><p>安装mathJax。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-filter-mathjax --save</span></span><br></pre></td></tr></table></figure></li>
-<li><p>进入站点配置文件，添加如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or &#x27;ams&#x27; or &#x27;all&#x27;</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br><span class="line">  <span class="attr">append_css:</span> <span class="literal">true</span> <span class="comment"># add CSS to pages rendered by MathJax</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span> <span class="comment"># 如果设置为true,默认每篇文章都会被mathjax渲染</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo-renderer-pandoc (https://github.com/wzpan/hexo-renderer-pandoc)</span></span><br><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">extra:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">toc:</span> <span class="comment"># will be passed as `--toc`. Note the colon，如果不需要自动生成目录无需添加此行</span></span><br><span class="line">  <span class="attr">extensions:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;+hard_line_breaks&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;+emoji&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;-implicit_figures&#x27;</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">     <span class="string">./pandoc_template.html</span> <span class="comment"># 如果不需要自动生成目录无需添加此行</span></span><br><span class="line"><span class="comment"># -----------------------------------------------------</span></span><br></pre></td></tr></table></figure>
-<p>若上文中 <code>every_page</code> 字段设为false，则需在每篇文章的meta数据中添加 <code>mathjax: true</code>字段，即可开启公式渲染。</p></li>
-<li><p>进入NexT主题配置文件(NexT安装请参照<a href="https://bxjc.github.io/posts/5ab2d68d/">Hexo + Next深度美化指北</a>)，并搜索 <code>math</code> 字段，修改如下：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="comment"># Default (false) will load mathjax / katex script on demand.</span></span><br><span class="line">  <span class="comment"># That is it only render those page which has `mathjax: true` in front-matter.</span></span><br><span class="line">  <span class="comment"># If you set it to true, it will load mathjax / katex srcipt EVERY PAGE.</span></span><br><span class="line">  <span class="attr">every_page:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
-<li><p>回到Git Bash，执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
-<p>即可在本地看到公式被成功渲染。</p>
-<p>（公式的支持真的是个大坑，花了我半天时间查阅资料T_T）</p></li>
-</ol>
-<h3 id="结语">结语</h3>
-<p>本文章实用工具篇仍会不断更新，敬请大家持续关注！有关问题可以在侧边栏的微信链接联系我。后续会发布<a href="https://bxjc.github.io/posts/5ab2d68d/">Hexo + Next深度美化指北</a>，干货满满，敬请关注！</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RDF入门(二)</title>
-    <url>/posts/bb97f6e5/</url>
-    <content><![CDATA[<h3 id="rdf抽象语法">RDF抽象语法</h3>
-<h4 id="基于图的数据模型">基于图的数据模型</h4>
-<p>抽象语法的核心数据结构为一系列三元组，每个三元组都包含一个subject，一个predicate和一个object。三元组的集合被称为RDF图，且RDF图为有向图。</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/1_ljkonn.png" /></p>
-<p>RDF图中有三类节点：IRIs，Literals和空节点。</p>
-<h4 id="资源和语句">资源和语句</h4>
-<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<u>引用值</u>，由Literal表示的资源称为其<u>文字值</u>，且Literal有数据类型定义。</p>
-<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<u>RDF语句</u>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
-<p>空节点不表示资源。涉及空节点的语句表示具有给定关系的东西存在，却没有显式命名它。</p>
-<h4 id="rdf词汇表与iri命名空间">RDF词汇表与IRI命名空间</h4>
-<p>RDF词汇表是用于RDF图的IRI集合，通常以被称为IRI命名空间的公共子串开头。而某些IRI命名空间通过约定与某些prefix相关联。</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/2_iawt5p.png" /></p>
-<h3 id="rdf图">RDF图</h3>
-<p>RDF图是一系列RDF三元组。</p>
-<h4 id="三元组">三元组</h4>
-<p>RDF三元组包含以下三个部分：</p>
-<ul>
-<li>subject，它是一个IRI或者空节点</li>
-<li>predicate，它是一个IRI</li>
-<li>object，它是一个IRI，Literal或者空节点</li>
-</ul>
-<p>RDF图中的节点集是subject和object的集合，predicate的IRI也可能作为同一图中的节点出现。</p>
-<h4 id="iri">IRI</h4>
-<p>RDF图中的IRI是一个Unicode字符串。RDF抽象语法中的IRI必须是绝对的（即绝对路径），且可能包含一个片段标识符。</p>
-<p><strong>IRI等价</strong>：当且仅当两个IRI的简单字符串比较相等时，两个IRI等价。</p>
-<h4 id="literals">Literals</h4>
-<p>Literals用于表示字符串、数字和日期等值。</p>
-<p>RDF图中的Literal由2或3个元素组成：</p>
-<ul>
-<li>词汇形式，表示为Unicode字符串</li>
-<li>数据类型IRI，确定Literal如何映射到文本值。</li>
-<li>当且仅当数据类型为langString，此时会添加一个语言标签。</li>
-</ul>
-<p>某些具体语法可能支持只含<strong>词汇形式</strong>的Literal，也有的具体语法<strong>不含数据类型IRI</strong>部分，因为它的数据类型总是langString。</p>
-<p>与Literal关联的文本值有以下特点：</p>
-<ol type="1">
-<li><p>如果Literal是一个有语言标记的字符串，则文本值是按<strong>词汇形式</strong>和<strong>语言标记</strong>顺序组成的pair。</p></li>
-<li><p>如果数据类型IRI能够被识别，假设d为数据类型IRI的引用。</p>
-<ul>
-<li>如果Literal的词汇形式在d的词汇空间中，那么文本值是将d的lexcial-to-value映射应用到词汇形式的结果。</li>
-<li>否则，Literal类型错误，没有值能与其相关联。<strong>这会产生语义不一致，但不是语法错误。</strong>在实现中需注意。</li>
-</ul></li>
-<li><p>如果数据类型IRI不能被识别，则文本值不由该规范定义。</p>
-<p><strong>Literal等价</strong>：当且仅当Literal的三个部分分别逐字符相等，两个Literal等价。</p></li>
-</ol>
-<h4 id="空节点">空节点</h4>
-<p>空节点与IRI、Literals没有交集，RDF不引用任何空节点的内部结构。</p>
-<h4 id="iri替换空节点">IRI替换空节点</h4>
-<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换不会改变RDF图的意义，但前提是不在别的地方使用空节点的IRI。</p>
-<h4 id="图的比较">图的比较</h4>
-<p>两个RDF图G和G'<strong>同构</strong>当且仅当G和G'之间存在<strong>双射M</strong>，满足：</p>
-<ol type="1">
-<li>M将空节点映射到空节点。</li>
-<li>M将Literal节点映射到Literal节点。</li>
-<li>M将IRI节点映射到IRI节点。</li>
-<li>G中存在三元组(s, p, o)当且仅当G'中存在三元组(M(s), p, M(o))。</li>
-</ol>
-<h4 id="rdf数据集">RDF数据集</h4>
-<p>RDF数据集是RDF图的集合，包括以下部分：</p>
-<ol type="1">
-<li>一个默认图(RDF图)，该图没有名称且可能为空。</li>
-<li>零或多个命名图，每个命名图都由图的名称和一个RDF图组成且图的名称唯一。</li>
-</ol>
-<p>空白节点可以在RDF图中共享。</p>
-<h4 id="rdf数据集比较">RDF数据集比较</h4>
-<p>两个RDF数据集<strong>同构</strong>当且仅当节点、三元组和图之间存在<strong>双射M</strong>，满足：</p>
-<ol type="1">
-<li>M将空节点映射到空节点。</li>
-<li>M是URLs和Literals的身份映射。</li>
-<li>对每个三元组(s, p, o)而言，M(s, p, o)=(M(s), M(p), M(o))。</li>
-<li>对每张图而言，G={t1, t2, ..., tn}，M(G)={M(t1), M(t2), ..., M(tn)}。</li>
-<li>DG2=M(DG1)</li>
-<li>&lt;n, G&gt;在NG1中当且仅当&lt;M(n), M(G)&gt;在NG2中。</li>
-</ol>
-<h3 id="数据类型">数据类型</h3>
-<p>数据类型与RDF Literals一同表示字符串、数字和日期等。</p>
-<p>数据类型由词汇空间、值空间和词汇到值的映射组成，并由一个或多个IRI表示。词汇空间是一组Unicode字符串。</p>
-<p>一个数据类型的词汇到值的映射是一组pair，其第一个元素属于该词汇空间，第二个元素属于该数据类型的值空间。该映射可以看做是<strong>从词汇空间到值空间的一个函数</strong>。</p>
-<p>使用 <code>xsd:boolean</code> 数据类型举例：</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/3_mqjjcq.png" /></p>
-<h4 id="xml架构内置数据类型">XML架构内置数据类型</h4>
-<p>下表列出的XML架构内置数据类型是与RDF相兼容的xsd类型：</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/4_kzgkwh.png" /></p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/5_bgycak.png" /></p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png" /></p>
-<p>不与RDF相兼容的类型不予列出。</p>
-<h3 id="段标识符">段标识符</h3>
-<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们标识辅助资源，通常为主资源的视图、定义或描述的一部分。</p>
-<p>例如，在承载RDF表示的主资源 <code>&lt;foo&gt;</code> 中，由段标识符 <code>bar</code> 标识的辅助资源是由完整的IRI <code>&lt;foo#bar&gt;</code> 表示的资源。</p>
-<h3 id="广义rdf三元组图和数据集">广义RDF三元组、图和数据集</h3>
-<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中每个元素都可能是IRI、空节点或Literal。</p>
-<p>广义RDF图是广义RDF三元组的集合。</p>
-<p>广义RDF数据集包括广义RDF图以及0或多个将IRI、空节点和Literal关联起来的pair。</p>
-<p>广义RDF三元组、图和数据集与规范RDF三元组、图和数据集不一样的地方仅在于IRI、空节点和Literal允许出现在任何位置，即包括subject、predicate、object或图名中。</p>
-<h3 id="结语">结语</h3>
-<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，让我对RDF基础有了更加深刻的理解。</p>
 ]]></content>
       <categories>
         <category>语义搜索</category>
@@ -799,6 +691,114 @@
       <tags>
         <tag>人机问答</tag>
         <tag>SQA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RDF入门(二)</title>
+    <url>/posts/bb97f6e5/</url>
+    <content><![CDATA[<h3 id="rdf抽象语法">RDF抽象语法</h3>
+<h4 id="基于图的数据模型">基于图的数据模型</h4>
+<p>抽象语法的核心数据结构为一系列三元组，每个三元组都包含一个subject，一个predicate和一个object。三元组的集合被称为RDF图，且RDF图为有向图。</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/1_ljkonn.png" /></p>
+<p>RDF图中有三类节点：IRIs，Literals和空节点。</p>
+<h4 id="资源和语句">资源和语句</h4>
+<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<u>引用值</u>，由Literal表示的资源称为其<u>文字值</u>，且Literal有数据类型定义。</p>
+<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<u>RDF语句</u>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
+<p>空节点不表示资源。涉及空节点的语句表示具有给定关系的东西存在，却没有显式命名它。</p>
+<h4 id="rdf词汇表与iri命名空间">RDF词汇表与IRI命名空间</h4>
+<p>RDF词汇表是用于RDF图的IRI集合，通常以被称为IRI命名空间的公共子串开头。而某些IRI命名空间通过约定与某些prefix相关联。</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/2_iawt5p.png" /></p>
+<h3 id="rdf图">RDF图</h3>
+<p>RDF图是一系列RDF三元组。</p>
+<h4 id="三元组">三元组</h4>
+<p>RDF三元组包含以下三个部分：</p>
+<ul>
+<li>subject，它是一个IRI或者空节点</li>
+<li>predicate，它是一个IRI</li>
+<li>object，它是一个IRI，Literal或者空节点</li>
+</ul>
+<p>RDF图中的节点集是subject和object的集合，predicate的IRI也可能作为同一图中的节点出现。</p>
+<h4 id="iri">IRI</h4>
+<p>RDF图中的IRI是一个Unicode字符串。RDF抽象语法中的IRI必须是绝对的（即绝对路径），且可能包含一个片段标识符。</p>
+<p><strong>IRI等价</strong>：当且仅当两个IRI的简单字符串比较相等时，两个IRI等价。</p>
+<h4 id="literals">Literals</h4>
+<p>Literals用于表示字符串、数字和日期等值。</p>
+<p>RDF图中的Literal由2或3个元素组成：</p>
+<ul>
+<li>词汇形式，表示为Unicode字符串</li>
+<li>数据类型IRI，确定Literal如何映射到文本值。</li>
+<li>当且仅当数据类型为langString，此时会添加一个语言标签。</li>
+</ul>
+<p>某些具体语法可能支持只含<strong>词汇形式</strong>的Literal，也有的具体语法<strong>不含数据类型IRI</strong>部分，因为它的数据类型总是langString。</p>
+<p>与Literal关联的文本值有以下特点：</p>
+<ol type="1">
+<li><p>如果Literal是一个有语言标记的字符串，则文本值是按<strong>词汇形式</strong>和<strong>语言标记</strong>顺序组成的pair。</p></li>
+<li><p>如果数据类型IRI能够被识别，假设d为数据类型IRI的引用。</p>
+<ul>
+<li>如果Literal的词汇形式在d的词汇空间中，那么文本值是将d的lexcial-to-value映射应用到词汇形式的结果。</li>
+<li>否则，Literal类型错误，没有值能与其相关联。<strong>这会产生语义不一致，但不是语法错误。</strong>在实现中需注意。</li>
+</ul></li>
+<li><p>如果数据类型IRI不能被识别，则文本值不由该规范定义。</p>
+<p><strong>Literal等价</strong>：当且仅当Literal的三个部分分别逐字符相等，两个Literal等价。</p></li>
+</ol>
+<h4 id="空节点">空节点</h4>
+<p>空节点与IRI、Literals没有交集，RDF不引用任何空节点的内部结构。</p>
+<h4 id="iri替换空节点">IRI替换空节点</h4>
+<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换不会改变RDF图的意义，但前提是不在别的地方使用空节点的IRI。</p>
+<h4 id="图的比较">图的比较</h4>
+<p>两个RDF图G和G'<strong>同构</strong>当且仅当G和G'之间存在<strong>双射M</strong>，满足：</p>
+<ol type="1">
+<li>M将空节点映射到空节点。</li>
+<li>M将Literal节点映射到Literal节点。</li>
+<li>M将IRI节点映射到IRI节点。</li>
+<li>G中存在三元组(s, p, o)当且仅当G'中存在三元组(M(s), p, M(o))。</li>
+</ol>
+<h4 id="rdf数据集">RDF数据集</h4>
+<p>RDF数据集是RDF图的集合，包括以下部分：</p>
+<ol type="1">
+<li>一个默认图(RDF图)，该图没有名称且可能为空。</li>
+<li>零或多个命名图，每个命名图都由图的名称和一个RDF图组成且图的名称唯一。</li>
+</ol>
+<p>空白节点可以在RDF图中共享。</p>
+<h4 id="rdf数据集比较">RDF数据集比较</h4>
+<p>两个RDF数据集<strong>同构</strong>当且仅当节点、三元组和图之间存在<strong>双射M</strong>，满足：</p>
+<ol type="1">
+<li>M将空节点映射到空节点。</li>
+<li>M是URLs和Literals的身份映射。</li>
+<li>对每个三元组(s, p, o)而言，M(s, p, o)=(M(s), M(p), M(o))。</li>
+<li>对每张图而言，G={t1, t2, ..., tn}，M(G)={M(t1), M(t2), ..., M(tn)}。</li>
+<li>DG2=M(DG1)</li>
+<li>&lt;n, G&gt;在NG1中当且仅当&lt;M(n), M(G)&gt;在NG2中。</li>
+</ol>
+<h3 id="数据类型">数据类型</h3>
+<p>数据类型与RDF Literals一同表示字符串、数字和日期等。</p>
+<p>数据类型由词汇空间、值空间和词汇到值的映射组成，并由一个或多个IRI表示。词汇空间是一组Unicode字符串。</p>
+<p>一个数据类型的词汇到值的映射是一组pair，其第一个元素属于该词汇空间，第二个元素属于该数据类型的值空间。该映射可以看做是<strong>从词汇空间到值空间的一个函数</strong>。</p>
+<p>使用 <code>xsd:boolean</code> 数据类型举例：</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/3_mqjjcq.png" /></p>
+<h4 id="xml架构内置数据类型">XML架构内置数据类型</h4>
+<p>下表列出的XML架构内置数据类型是与RDF相兼容的xsd类型：</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/4_kzgkwh.png" /></p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/5_bgycak.png" /></p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png" /></p>
+<p>不与RDF相兼容的类型不予列出。</p>
+<h3 id="段标识符">段标识符</h3>
+<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们标识辅助资源，通常为主资源的视图、定义或描述的一部分。</p>
+<p>例如，在承载RDF表示的主资源 <code>&lt;foo&gt;</code> 中，由段标识符 <code>bar</code> 标识的辅助资源是由完整的IRI <code>&lt;foo#bar&gt;</code> 表示的资源。</p>
+<h3 id="广义rdf三元组图和数据集">广义RDF三元组、图和数据集</h3>
+<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中每个元素都可能是IRI、空节点或Literal。</p>
+<p>广义RDF图是广义RDF三元组的集合。</p>
+<p>广义RDF数据集包括广义RDF图以及0或多个将IRI、空节点和Literal关联起来的pair。</p>
+<p>广义RDF三元组、图和数据集与规范RDF三元组、图和数据集不一样的地方仅在于IRI、空节点和Literal允许出现在任何位置，即包括subject、predicate、object或图名中。</p>
+<h3 id="结语">结语</h3>
+<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，让我对RDF基础有了更加深刻的理解。</p>
+]]></content>
+      <categories>
+        <category>语义搜索</category>
+      </categories>
+      <tags>
+        <tag>语义搜索</tag>
+        <tag>RDF</tag>
       </tags>
   </entry>
 </search>
