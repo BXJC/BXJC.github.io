@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/5_bgycak.png">
 <meta property="og:image" content="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png">
 <meta property="article:published_time" content="2021-08-20T08:34:26.000Z">
-<meta property="article:modified_time" content="2021-08-20T08:40:14.627Z">
+<meta property="article:modified_time" content="2021-08-24T13:31:10.034Z">
 <meta property="article:author" content="北栀">
 <meta property="article:tag" content="语义搜索">
 <meta property="article:tag" content="RDF">
@@ -86,6 +86,7 @@
       <h1 class="site-title">zzy的打工日志</h1>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">主要包括图神经网络、语义搜索、知识图谱等方面的内容</p>
   </div>
 
   <div class="site-nav-right">
@@ -269,10 +270,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-08-20 16:34:26 / 修改时间：16:40:14" itemprop="dateCreated datePublished" datetime="2021-08-20T16:34:26+08:00">2021-08-20</time>
+      <time title="创建时间：2021-08-20 16:34:26" itemprop="dateCreated datePublished" datetime="2021-08-20T16:34:26+08:00">2021-08-20</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-24 21:31:10" itemprop="dateModified" datetime="2021-08-24T21:31:10+08:00">2021-08-24</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -322,8 +329,8 @@
 <p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/1_ljkonn.png" /></p>
 <p>RDF图中有三类节点：IRIs，Literals和空节点。</p>
 <h4 id="资源和语句">资源和语句</h4>
-<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<u>引用值</u>，由Literal表示的资源称为其<u>文字值</u>，且Literal有数据类型定义。</p>
-<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<u>RDF语句</u>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
+<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<strong>引用值</strong>，由Literal表示的资源称为其<strong>字面值</strong>，且Literal有数据类型定义。</p>
+<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<strong>RDF语句</strong>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
 <p>空节点不表示资源。涉及空节点的语句表示具有给定关系的东西存在，却没有显式命名它。</p>
 <h4 id="rdf词汇表与iri命名空间">RDF词汇表与IRI命名空间</h4>
 <p>RDF词汇表是用于RDF图的IRI集合，通常以被称为IRI命名空间的公共子串开头。而某些IRI命名空间通过约定与某些prefix相关联。</p>
@@ -350,7 +357,7 @@
 <li>当且仅当数据类型为langString，此时会添加一个语言标签。</li>
 </ul>
 <p>某些具体语法可能支持只含<strong>词汇形式</strong>的Literal，也有的具体语法<strong>不含数据类型IRI</strong>部分，因为它的数据类型总是langString。</p>
-<p>与Literal关联的文本值有以下特点：</p>
+<p>与Literal关联的字面值有以下特点：</p>
 <ol type="1">
 <li><p>如果Literal是一个有语言标记的字符串，则文本值是按<strong>词汇形式</strong>和<strong>语言标记</strong>顺序组成的pair。</p></li>
 <li><p>如果数据类型IRI能够被识别，假设d为数据类型IRI的引用。</p>
@@ -364,7 +371,7 @@
 <h4 id="空节点">空节点</h4>
 <p>空节点与IRI、Literals没有交集，RDF不引用任何空节点的内部结构。</p>
 <h4 id="iri替换空节点">IRI替换空节点</h4>
-<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换不会改变RDF图的意义，但前提是不在别的地方使用空节点的IRI。</p>
+<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换<strong>不会改变RDF图的意义</strong>，但前提是不在别的地方使用空节点的IRI。</p>
 <h4 id="图的比较">图的比较</h4>
 <p>两个RDF图G和G'<strong>同构</strong>当且仅当G和G'之间存在<strong>双射M</strong>，满足：</p>
 <ol type="1">
@@ -403,15 +410,15 @@
 <p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png" /></p>
 <p>不与RDF相兼容的类型不予列出。</p>
 <h3 id="段标识符">段标识符</h3>
-<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们标识辅助资源，通常为主资源的视图、定义或描述的一部分。</p>
+<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们<strong>标识辅助资源</strong>，通常为主资源的视图、定义或描述的一部分。</p>
 <p>例如，在承载RDF表示的主资源 <code>&lt;foo&gt;</code> 中，由段标识符 <code>bar</code> 标识的辅助资源是由完整的IRI <code>&lt;foo#bar&gt;</code> 表示的资源。</p>
 <h3 id="广义rdf三元组图和数据集">广义RDF三元组、图和数据集</h3>
-<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中每个元素都可能是IRI、空节点或Literal。</p>
+<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中<strong>每个元素都可能是IRI、空节点或Literal</strong>。</p>
 <p>广义RDF图是广义RDF三元组的集合。</p>
 <p>广义RDF数据集包括广义RDF图以及0或多个将IRI、空节点和Literal关联起来的pair。</p>
 <p>广义RDF三元组、图和数据集与规范RDF三元组、图和数据集不一样的地方仅在于IRI、空节点和Literal允许出现在任何位置，即包括subject、predicate、object或图名中。</p>
 <h3 id="结语">结语</h3>
-<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，让我对RDF基础有了更加深刻的理解。</p>
+<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，能够让读者对RDF基础有更加深刻的理解。</p>
 
     </div>
 

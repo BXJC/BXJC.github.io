@@ -459,52 +459,52 @@
   <entry>
     <title>RDF入门(三)</title>
     <url>/posts/c564d6ce/</url>
-    <content><![CDATA[<h3 id="简介">简介</h3>
+    <content><![CDATA[<h2 id="简介">简介</h2>
 <p>RDF模式为RDF数据提供了一个数据建模词汇表，同时也是RDF的语义扩展，它提供了描述相关资源组以及这些资源之间的关系的机制。</p>
-<h3 id="类">类</h3>
+<h2 id="类">类</h2>
 <p>资源可以被分组为类，类的成员被称为该类的实例，类本身就是资源。它们通常由IRI识别，并可以使用RDF属性进行描述。<code>rdf：type</code> 属性可用于声明资源是类的实例。</p>
 <p>RDF区分类与它的实例集，与每个类现相关联的是一个集合，称为该类的扩展，它是该类的实例集。两个类可能含有相同的实例集但它们是不同的类。一个类可以是其自身的类扩展中的一个成员，也可以是其本身的一个实例。属于RDF模式类的资源组本身就是一个被称为 <code>rdfs：Class</code> 的类。</p>
 <p>所有数据类型都是类。属于一个数据类型的类的实例是该数据类型的值空间的成员。</p>
-<h4 id="rdfsresource">rdfs:Resource</h4>
+<h3 id="rdfsresource">rdfs:Resource</h3>
 <p>RDF描述的所有东西都被称为资源，并且是类 <code>rdfs:Resource</code> 的实例。其他所有类都是该类的子类。 <code>rdfs:Resource</code> 是 <code>rdfs:Class</code> 类的实例。</p>
-<h4 id="rdfsclass">rdfs:Class</h4>
+<h3 id="rdfsclass">rdfs:Class</h3>
 <p>该类是属于RDF类的资源类。 <code>rdfs:Class</code> 是 <code>rdfs:Class</code> 类的实例。</p>
-<h4 id="rdfsliteral">rdfs:Literal</h4>
+<h3 id="rdfsliteral">rdfs:Literal</h3>
 <p>该类是Literal值的类，例如String和Integer。<code>rdfs:Literal</code> 是 <code>rdfs:Class</code> 的实例，也是 <code>rdfs:Resource</code> 的子类。</p>
-<h4 id="rdfsdatatype">rdfs:Datatype</h4>
+<h3 id="rdfsdatatype">rdfs:Datatype</h3>
 <p>该类是数据类型类，其中所有实例都对应于RDF模型中的数据类型。该类同时是 <code>rdf:Class</code> 类的子类和实例，并且该类的每个实例都是 <code>rdfs:Literal</code> 类的子类。</p>
-<h4 id="rdflangstring">rdf:langString</h4>
+<h3 id="rdflangstring">rdf:langString</h3>
 <p>该类是表示语言标记的字符串值的类，同时是 <code>rdfs:Datatype</code> 类的实例和 <code>rdfs:Literal</code> 类的子类。</p>
-<h4 id="rdfhtml">rdf:HTML</h4>
+<h3 id="rdfhtml">rdf:HTML</h3>
 <p>该类是表示HTML文本值的类，同时是 <code>rdfs:Datatype</code> 类的实例和 <code>rdfs:Literal</code> 类的子类。</p>
-<h4 id="rdfxmlliteral">rdf:XMLLiteral</h4>
+<h3 id="rdfxmlliteral">rdf:XMLLiteral</h3>
 <p>该类是表示XML文本值的类，同时是 <code>rdfs:Datatype</code> 类的实例和 <code>rdfs:Literal</code> 类的子类。</p>
-<h4 id="rdfproperty">rdf:Property</h4>
+<h3 id="rdfproperty">rdf:Property</h3>
 <p>该类是表示RDF属性的类，同时是 <code>rdfs:Class</code> 类的实例。</p>
-<h3 id="属性">属性</h3>
+<h2 id="属性">属性</h2>
 <p>RDF抽象语法将属性定义为描述subject和object的关系。</p>
-<h4 id="rdfsrange">rdfs:range</h4>
+<h3 id="rdfsrange">rdfs:range</h3>
 <p>该类是 <code>rdf:Property</code> 类的实例，用于声明属性的值是一个或多个类的实例。例如，三元组 <code>P rdfs:range C</code> 声明P是 <code>rdf:Property</code> 类的实例，C是 <code>rdf:Class</code> 类的实例，由谓词为P的三元组的object表示的资源是类C的实例。</p>
-<h4 id="rdfsdomain">rdfs:domain</h4>
+<h3 id="rdfsdomain">rdfs:domain</h3>
 <p>该类是 <code>rdf:Property</code> 类的实例，用于声明任何具有给定属性的资源都是一个或多个类的实例。例如，三元组 <code>P rdfs:domain C</code> 声明P是 <code>rdf:Property</code> 类的实例，C是 <code>rdf:Class</code> 类的实例，由谓词为P的三元组的subject所表示的资源是C类的实例。</p>
-<h4 id="rdftype">rdf:type</h4>
+<h3 id="rdftype">rdf:type</h3>
 <p>该类是 <code>rdf:Property</code> 类的实例，用于声明一个资源是某个类的实例。例如，三元组 <code>R rdf:type C</code> 表示C是 <code>rdfs:Class</code>类的实例，且R是C的实例。</p>
 <p><code>rdfs:type</code> 的 <code>rdfs:domain</code> 是 <code>rdfs:Resource</code>。 <code>rdfs:type</code> 的 <code>rdfs:range</code> 是 <code>rdfs:Class</code>。</p>
-<h4 id="rdfssubclassof">rdfs:subClassOf</h4>
+<h3 id="rdfssubclassof">rdfs:subClassOf</h3>
 <p>该属性是 <code>rdfs:Property</code> 的实例，用于声明一个类的所有实例都是另一个类的实例。例如，三元组 <code>C1 rdfs:subClassOf C2</code> 声明C1、C2都是 <code>rdfs:Class</code> 类的实例且C1是C2的子类，该属性可传递。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Class</code>。</p>
-<h4 id="rdfssubpropertyof">rdfs:subPropertyOf</h4>
+<h3 id="rdfssubpropertyof">rdfs:subPropertyOf</h3>
 <p>该属性是 <code>rdfs:Property</code> 的实例，用于声明与一个属性相关的所有资源也与另一个属性相关。例如，三元组 <code>P1 rdfs:subPropertyOf P2</code> 声明P1、P2都是 <code>rdfs:Property</code> 类的实例且P1是P2的子属性，该属性可传递。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Property</code>。</p>
-<h4 id="rdfslabel">rdfs:label</h4>
+<h3 id="rdfslabel">rdfs:label</h3>
 <p>该类是 <code>rdfs:Property</code> 的实例，用于提供资源名称的人类可读版本。例如，三元组 <code>R rdfs:label L</code> 声明L是R的人类可读版本。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:Resource</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Literal</code>。</p>
-<h4 id="rdfscomment">rdfs:comment</h4>
+<h3 id="rdfscomment">rdfs:comment</h3>
 <p>该类是 <code>rdfs:Property</code> 的实例，用于提供资源的人类可读描述。例如，三元组 <code>R rdfs:label L</code> 声明L是R的人类可读描述。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:Resource</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Literal</code>。</p>
-<h3 id="其他词汇表">其他词汇表</h3>
+<h2 id="其他词汇表">其他词汇表</h2>
 <p>本节定义了其他的类和属性，包括用于表示容器和RDF语句的构造，以及用于在万维网中部署RDF词汇表描述的构造。</p>
-<h4 id="容器类和属性">容器类和属性</h4>
+<h3 id="容器类和属性">容器类和属性</h3>
 <p>RDF容器是用于表示集合的资源。同一资源可能多次出现在容器中。</p>
 <p>这里定义了三种不同类型的容器，三种容器的形式语义相同，但不同的类可以用来表示进一步的信息。</p>
 <ul>
@@ -513,61 +513,169 @@
 <li><code>rdf:Alt</code>：表示容器的典型操作是选择一个元素。</li>
 </ul>
 <p>RDF容器由以下类和属性定义：</p>
-<h5 id="rdfscontainer">rdfs:Container</h5>
+<h4 id="rdfscontainer">rdfs:Container</h4>
 <p>该类是其他类的父类。</p>
-<h5 id="rdfbag">rdf:Bag</h5>
+<h4 id="rdfbag">rdf:Bag</h4>
 <p>该类通常向读者表明该容器是无序的。</p>
-<h5 id="rdfseq">rdf:Seq</h5>
+<h4 id="rdfseq">rdf:Seq</h4>
 <p>该类通常向读者表明该容器按照容器中的成员属性进行显式的数值排序。</p>
-<h5 id="rdfalt">rdf:Alt</h5>
+<h4 id="rdfalt">rdf:Alt</h4>
 <p>该类通常向读者表明该容器的典型操作是选择一个元素。默认选择容器中的第一个元素。</p>
-<h5 id="rdfscontainermembershipproperty">rdfs:ContainerMembershipProperty</h5>
+<h4 id="rdfscontainermembershipproperty">rdfs:ContainerMembershipProperty</h4>
 <p>该类用于声明资源是容器的成员，且它是 <code>rdf:property</code> 类的子类。例如，三元组 <code>C rdf:_nnn O</code> 中， <code>nnn</code> 是一个整数大于0且不含前导零的十进制表示，声明O是容器C的一个成员。</p>
-<h5 id="rdfsmember">rdfs:member</h5>
+<h4 id="rdfsmember">rdfs:member</h4>
 <p>该属性是 <code>rdfs:Property</code> 的实例，是所有容器成员属性的父属性。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Resource</code>。</p>
-<h4 id="rdf集合">RDF集合</h4>
+<h3 id="rdf集合">RDF集合</h3>
 <p>RDF集合表示一系列items。</p>
-<h5 id="rdflist">rdf:List</h5>
+<h4 id="rdflist">rdf:List</h4>
 <p>该类是 <code>rdfs:Class</code> 类的实例，用于构建对列表和其他类似列表的结构的描述。</p>
-<h5 id="rdffirst">rdf:first</h5>
+<h4 id="rdffirst">rdf:first</h4>
 <p>该类是 <code>rdfs:Property</code> 类的实例，用于构建对列表和其他类似列表的结构的描述。例如，三元组 <code>L rdf:first O</code> 声明L和O之间存在第一元素关系。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:List</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Resource</code>。</p>
-<h5 id="rdfrest">rdf:rest</h5>
+<h4 id="rdfrest">rdf:rest</h4>
 <p>该类是 <code>rdfs:Property</code> 类的实例，用于构建对列表和其他类似列表的结构的描述。例如，三元组 <code>L rdf:rest O</code> 声明L和O之间存在剩余列表关系。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:List</code>。</p>
-<h5 id="rdfnil">rdf:nil</h5>
+<h4 id="rdfnil">rdf:nil</h4>
 <p>该资源是 <code>rdfs:List</code> 类的实例，用于表示空列表或其他类似列表的结构。例如，三元组 <code>L rdf:rest rdf:nil</code> 声明L是 <code>rdf:List</code> 含有一个项的实例，该项能被 <code>rdf:first</code> 属性表示。</p>
-<h4 id="具体词汇表">具体词汇表</h4>
-<h5 id="rdfstatement">rdf:Statement</h5>
+<h3 id="具体词汇表">具体词汇表</h3>
+<h4 id="rdfstatement">rdf:Statement</h4>
 <p>该类是 <code>rdfs:Class</code> 类的实例，用于表示RDF语句。RDF语句的subject是 <code>rdf:Resource</code> 类的实例，predicate是 <code>rdf:Property</code> 类的实例,object是 <code>rdf:Resource</code> 类的实例。</p>
-<h5 id="rdfsubject">rdf:subject</h5>
+<h4 id="rdfsubject">rdf:subject</h4>
 <p>该类是 <code>rdfs:Resource</code> 类的实例，用于陈述RDF语句的subject。例如，三元组 <code>S rdf:subject R</code> 声明S是 <code>rdf:Statement</code> 的实例，S的subject是R。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:Statement</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Resource</code>。</p>
-<h5 id="rdfpredicate">rdf:predicate</h5>
+<h4 id="rdfpredicate">rdf:predicate</h4>
 <p>该类是 <code>rdfs:Property</code> 类的实例，用于陈述RDF语句的predicate。例如，三元组 <code>S rdf:predicate P</code> 声明S是 <code>rdf:Statement</code> 的实例，P是 <code>rdfs:Property</code> 的实例，S的predicate是P。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:Statement</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Resource</code>。</p>
-<h5 id="rdfobject">rdf:object</h5>
+<h4 id="rdfobject">rdf:object</h4>
 <p>该类是 <code>rdfs:Resource</code> 类的实例，用于陈述RDF语句的object。例如，三元组 <code>S rdf:Object O</code> 声明S是 <code>rdf:Statement</code> 的实例，S的object是O。</p>
 <p>该类的 <code>rdfs:domain</code> 是 <code>rdfs:Statement</code>。该类的 <code>rdfs:range</code> 是 <code>rdfs:Resource</code>。</p>
-<h4 id="实用属性">实用属性</h4>
-<h5 id="rdfsseealso">rdfs:seeAlso</h5>
+<h3 id="实用属性">实用属性</h3>
+<h4 id="rdfsseealso">rdfs:seeAlso</h4>
 <p>该属性是 <code>rdfs:Property</code> 类的实例，用于表示可能提供有关主题资源的附加信息的资源。例如，三元组 <code>S rdfs:seeAlso O</code> 声明资源O可以提供关于S的附加信息。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Resource</code>。</p>
-<h5 id="rdfsisdefinedby">rdfs:isDefinedBy</h5>
+<h4 id="rdfsisdefinedby">rdfs:isDefinedBy</h4>
 <p>该类是 <code>rdfs:Property</code> 类的实例，用于表示定义subject资源的资源，且它是 <code>rdfs:seeAlso</code> 的子属性 。例如，三元组 <code>S rdfs:isDefinedBy O</code> 声明资源O定义了S。</p>
 <p>该类的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Resource</code>。</p>
-<h5 id="rdfvalue">rdf:value</h5>
+<h4 id="rdfvalue">rdf:value</h4>
 <p>该属性是 <code>rdfs:Property</code> 类的实例，用于描述结构化值。</p>
 <p>该属性的 <code>rdfs:domain</code> 和 <code>rdfs:range</code> 都是 <code>rdfs:Resource</code>。</p>
-<h3 id="rdf模式总结">RDF模式总结</h3>
-<h4 id="rdf类">RDF类</h4>
+<h2 id="rdf模式总结">RDF模式总结</h2>
+<h3 id="rdf类">RDF类</h3>
 <p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629516376/Blog/RDF-3/1_yhxkqv.png" /></p>
-<h4 id="rdf属性">RDF属性</h4>
+<h3 id="rdf属性">RDF属性</h3>
 <p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629516376/Blog/RDF-3/2_i8jv7k.png" /></p>
 <p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629516377/Blog/RDF-3/3_znfznv.png" /></p>
-<h3 id="结语">结语</h3>
+<h2 id="结语">结语</h2>
 <p>本读物详细描述了RDF模式中的类、属性以及其他词汇表的内容，并最终采用了表格来总结整本读物的内容。</p>
+]]></content>
+      <categories>
+        <category>语义搜索</category>
+      </categories>
+      <tags>
+        <tag>语义搜索</tag>
+        <tag>RDF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RDF入门(二)</title>
+    <url>/posts/bb97f6e5/</url>
+    <content><![CDATA[<h3 id="rdf抽象语法">RDF抽象语法</h3>
+<h4 id="基于图的数据模型">基于图的数据模型</h4>
+<p>抽象语法的核心数据结构为一系列三元组，每个三元组都包含一个subject，一个predicate和一个object。三元组的集合被称为RDF图，且RDF图为有向图。</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/1_ljkonn.png" /></p>
+<p>RDF图中有三类节点：IRIs，Literals和空节点。</p>
+<h4 id="资源和语句">资源和语句</h4>
+<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<strong>引用值</strong>，由Literal表示的资源称为其<strong>字面值</strong>，且Literal有数据类型定义。</p>
+<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<strong>RDF语句</strong>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
+<p>空节点不表示资源。涉及空节点的语句表示具有给定关系的东西存在，却没有显式命名它。</p>
+<h4 id="rdf词汇表与iri命名空间">RDF词汇表与IRI命名空间</h4>
+<p>RDF词汇表是用于RDF图的IRI集合，通常以被称为IRI命名空间的公共子串开头。而某些IRI命名空间通过约定与某些prefix相关联。</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/2_iawt5p.png" /></p>
+<h3 id="rdf图">RDF图</h3>
+<p>RDF图是一系列RDF三元组。</p>
+<h4 id="三元组">三元组</h4>
+<p>RDF三元组包含以下三个部分：</p>
+<ul>
+<li>subject，它是一个IRI或者空节点</li>
+<li>predicate，它是一个IRI</li>
+<li>object，它是一个IRI，Literal或者空节点</li>
+</ul>
+<p>RDF图中的节点集是subject和object的集合，predicate的IRI也可能作为同一图中的节点出现。</p>
+<h4 id="iri">IRI</h4>
+<p>RDF图中的IRI是一个Unicode字符串。RDF抽象语法中的IRI必须是绝对的（即绝对路径），且可能包含一个片段标识符。</p>
+<p><strong>IRI等价</strong>：当且仅当两个IRI的简单字符串比较相等时，两个IRI等价。</p>
+<h4 id="literals">Literals</h4>
+<p>Literals用于表示字符串、数字和日期等值。</p>
+<p>RDF图中的Literal由2或3个元素组成：</p>
+<ul>
+<li>词汇形式，表示为Unicode字符串</li>
+<li>数据类型IRI，确定Literal如何映射到文本值。</li>
+<li>当且仅当数据类型为langString，此时会添加一个语言标签。</li>
+</ul>
+<p>某些具体语法可能支持只含<strong>词汇形式</strong>的Literal，也有的具体语法<strong>不含数据类型IRI</strong>部分，因为它的数据类型总是langString。</p>
+<p>与Literal关联的字面值有以下特点：</p>
+<ol type="1">
+<li><p>如果Literal是一个有语言标记的字符串，则文本值是按<strong>词汇形式</strong>和<strong>语言标记</strong>顺序组成的pair。</p></li>
+<li><p>如果数据类型IRI能够被识别，假设d为数据类型IRI的引用。</p>
+<ul>
+<li>如果Literal的词汇形式在d的词汇空间中，那么文本值是将d的lexcial-to-value映射应用到词汇形式的结果。</li>
+<li>否则，Literal类型错误，没有值能与其相关联。<strong>这会产生语义不一致，但不是语法错误。</strong>在实现中需注意。</li>
+</ul></li>
+<li><p>如果数据类型IRI不能被识别，则文本值不由该规范定义。</p>
+<p><strong>Literal等价</strong>：当且仅当Literal的三个部分分别逐字符相等，两个Literal等价。</p></li>
+</ol>
+<h4 id="空节点">空节点</h4>
+<p>空节点与IRI、Literals没有交集，RDF不引用任何空节点的内部结构。</p>
+<h4 id="iri替换空节点">IRI替换空节点</h4>
+<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换<strong>不会改变RDF图的意义</strong>，但前提是不在别的地方使用空节点的IRI。</p>
+<h4 id="图的比较">图的比较</h4>
+<p>两个RDF图G和G'<strong>同构</strong>当且仅当G和G'之间存在<strong>双射M</strong>，满足：</p>
+<ol type="1">
+<li>M将空节点映射到空节点。</li>
+<li>M将Literal节点映射到Literal节点。</li>
+<li>M将IRI节点映射到IRI节点。</li>
+<li>G中存在三元组(s, p, o)当且仅当G'中存在三元组(M(s), p, M(o))。</li>
+</ol>
+<h4 id="rdf数据集">RDF数据集</h4>
+<p>RDF数据集是RDF图的集合，包括以下部分：</p>
+<ol type="1">
+<li>一个默认图(RDF图)，该图没有名称且可能为空。</li>
+<li>零或多个命名图，每个命名图都由图的名称和一个RDF图组成且图的名称唯一。</li>
+</ol>
+<p>空白节点可以在RDF图中共享。</p>
+<h4 id="rdf数据集比较">RDF数据集比较</h4>
+<p>两个RDF数据集<strong>同构</strong>当且仅当节点、三元组和图之间存在<strong>双射M</strong>，满足：</p>
+<ol type="1">
+<li>M将空节点映射到空节点。</li>
+<li>M是URLs和Literals的身份映射。</li>
+<li>对每个三元组(s, p, o)而言，M(s, p, o)=(M(s), M(p), M(o))。</li>
+<li>对每张图而言，G={t1, t2, ..., tn}，M(G)={M(t1), M(t2), ..., M(tn)}。</li>
+<li>DG2=M(DG1)</li>
+<li>&lt;n, G&gt;在NG1中当且仅当&lt;M(n), M(G)&gt;在NG2中。</li>
+</ol>
+<h3 id="数据类型">数据类型</h3>
+<p>数据类型与RDF Literals一同表示字符串、数字和日期等。</p>
+<p>数据类型由词汇空间、值空间和词汇到值的映射组成，并由一个或多个IRI表示。词汇空间是一组Unicode字符串。</p>
+<p>一个数据类型的词汇到值的映射是一组pair，其第一个元素属于该词汇空间，第二个元素属于该数据类型的值空间。该映射可以看做是<strong>从词汇空间到值空间的一个函数</strong>。</p>
+<p>使用 <code>xsd:boolean</code> 数据类型举例：</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/3_mqjjcq.png" /></p>
+<h4 id="xml架构内置数据类型">XML架构内置数据类型</h4>
+<p>下表列出的XML架构内置数据类型是与RDF相兼容的xsd类型：</p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/4_kzgkwh.png" /></p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/5_bgycak.png" /></p>
+<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png" /></p>
+<p>不与RDF相兼容的类型不予列出。</p>
+<h3 id="段标识符">段标识符</h3>
+<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们<strong>标识辅助资源</strong>，通常为主资源的视图、定义或描述的一部分。</p>
+<p>例如，在承载RDF表示的主资源 <code>&lt;foo&gt;</code> 中，由段标识符 <code>bar</code> 标识的辅助资源是由完整的IRI <code>&lt;foo#bar&gt;</code> 表示的资源。</p>
+<h3 id="广义rdf三元组图和数据集">广义RDF三元组、图和数据集</h3>
+<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中<strong>每个元素都可能是IRI、空节点或Literal</strong>。</p>
+<p>广义RDF图是广义RDF三元组的集合。</p>
+<p>广义RDF数据集包括广义RDF图以及0或多个将IRI、空节点和Literal关联起来的pair。</p>
+<p>广义RDF三元组、图和数据集与规范RDF三元组、图和数据集不一样的地方仅在于IRI、空节点和Literal允许出现在任何位置，即包括subject、predicate、object或图名中。</p>
+<h3 id="结语">结语</h3>
+<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，能够让读者对RDF基础有更加深刻的理解。</p>
 ]]></content>
       <categories>
         <category>语义搜索</category>
@@ -691,114 +799,6 @@
       <tags>
         <tag>人机问答</tag>
         <tag>SQA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RDF入门(二)</title>
-    <url>/posts/bb97f6e5/</url>
-    <content><![CDATA[<h3 id="rdf抽象语法">RDF抽象语法</h3>
-<h4 id="基于图的数据模型">基于图的数据模型</h4>
-<p>抽象语法的核心数据结构为一系列三元组，每个三元组都包含一个subject，一个predicate和一个object。三元组的集合被称为RDF图，且RDF图为有向图。</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/1_ljkonn.png" /></p>
-<p>RDF图中有三类节点：IRIs，Literals和空节点。</p>
-<h4 id="资源和语句">资源和语句</h4>
-<p>任何IRI或Literal都表示某种东西，它们被称为资源。由IRI表示的资源称为其<u>引用值</u>，由Literal表示的资源称为其<u>文字值</u>，且Literal有数据类型定义。</p>
-<p>RDF三元组表示其subject和object之间存在predicate表示的某种关系。RDF三元组对应的语句称为<u>RDF语句</u>。predicate本身是一个IRI，且表示一个属性，即一个可以被视为二进制关系的资源。</p>
-<p>空节点不表示资源。涉及空节点的语句表示具有给定关系的东西存在，却没有显式命名它。</p>
-<h4 id="rdf词汇表与iri命名空间">RDF词汇表与IRI命名空间</h4>
-<p>RDF词汇表是用于RDF图的IRI集合，通常以被称为IRI命名空间的公共子串开头。而某些IRI命名空间通过约定与某些prefix相关联。</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/2_iawt5p.png" /></p>
-<h3 id="rdf图">RDF图</h3>
-<p>RDF图是一系列RDF三元组。</p>
-<h4 id="三元组">三元组</h4>
-<p>RDF三元组包含以下三个部分：</p>
-<ul>
-<li>subject，它是一个IRI或者空节点</li>
-<li>predicate，它是一个IRI</li>
-<li>object，它是一个IRI，Literal或者空节点</li>
-</ul>
-<p>RDF图中的节点集是subject和object的集合，predicate的IRI也可能作为同一图中的节点出现。</p>
-<h4 id="iri">IRI</h4>
-<p>RDF图中的IRI是一个Unicode字符串。RDF抽象语法中的IRI必须是绝对的（即绝对路径），且可能包含一个片段标识符。</p>
-<p><strong>IRI等价</strong>：当且仅当两个IRI的简单字符串比较相等时，两个IRI等价。</p>
-<h4 id="literals">Literals</h4>
-<p>Literals用于表示字符串、数字和日期等值。</p>
-<p>RDF图中的Literal由2或3个元素组成：</p>
-<ul>
-<li>词汇形式，表示为Unicode字符串</li>
-<li>数据类型IRI，确定Literal如何映射到文本值。</li>
-<li>当且仅当数据类型为langString，此时会添加一个语言标签。</li>
-</ul>
-<p>某些具体语法可能支持只含<strong>词汇形式</strong>的Literal，也有的具体语法<strong>不含数据类型IRI</strong>部分，因为它的数据类型总是langString。</p>
-<p>与Literal关联的文本值有以下特点：</p>
-<ol type="1">
-<li><p>如果Literal是一个有语言标记的字符串，则文本值是按<strong>词汇形式</strong>和<strong>语言标记</strong>顺序组成的pair。</p></li>
-<li><p>如果数据类型IRI能够被识别，假设d为数据类型IRI的引用。</p>
-<ul>
-<li>如果Literal的词汇形式在d的词汇空间中，那么文本值是将d的lexcial-to-value映射应用到词汇形式的结果。</li>
-<li>否则，Literal类型错误，没有值能与其相关联。<strong>这会产生语义不一致，但不是语法错误。</strong>在实现中需注意。</li>
-</ul></li>
-<li><p>如果数据类型IRI不能被识别，则文本值不由该规范定义。</p>
-<p><strong>Literal等价</strong>：当且仅当Literal的三个部分分别逐字符相等，两个Literal等价。</p></li>
-</ol>
-<h4 id="空节点">空节点</h4>
-<p>空节点与IRI、Literals没有交集，RDF不引用任何空节点的内部结构。</p>
-<h4 id="iri替换空节点">IRI替换空节点</h4>
-<p>空节点在RDF抽象语法中没有标识符，在需要更强的识别的情况下，系统可以用IRI替换RDF图中的部分或全部空节点。这样的系统应该为每个被替换的空节点创建一个新的、全局唯一的IRI。这个转换不会改变RDF图的意义，但前提是不在别的地方使用空节点的IRI。</p>
-<h4 id="图的比较">图的比较</h4>
-<p>两个RDF图G和G'<strong>同构</strong>当且仅当G和G'之间存在<strong>双射M</strong>，满足：</p>
-<ol type="1">
-<li>M将空节点映射到空节点。</li>
-<li>M将Literal节点映射到Literal节点。</li>
-<li>M将IRI节点映射到IRI节点。</li>
-<li>G中存在三元组(s, p, o)当且仅当G'中存在三元组(M(s), p, M(o))。</li>
-</ol>
-<h4 id="rdf数据集">RDF数据集</h4>
-<p>RDF数据集是RDF图的集合，包括以下部分：</p>
-<ol type="1">
-<li>一个默认图(RDF图)，该图没有名称且可能为空。</li>
-<li>零或多个命名图，每个命名图都由图的名称和一个RDF图组成且图的名称唯一。</li>
-</ol>
-<p>空白节点可以在RDF图中共享。</p>
-<h4 id="rdf数据集比较">RDF数据集比较</h4>
-<p>两个RDF数据集<strong>同构</strong>当且仅当节点、三元组和图之间存在<strong>双射M</strong>，满足：</p>
-<ol type="1">
-<li>M将空节点映射到空节点。</li>
-<li>M是URLs和Literals的身份映射。</li>
-<li>对每个三元组(s, p, o)而言，M(s, p, o)=(M(s), M(p), M(o))。</li>
-<li>对每张图而言，G={t1, t2, ..., tn}，M(G)={M(t1), M(t2), ..., M(tn)}。</li>
-<li>DG2=M(DG1)</li>
-<li>&lt;n, G&gt;在NG1中当且仅当&lt;M(n), M(G)&gt;在NG2中。</li>
-</ol>
-<h3 id="数据类型">数据类型</h3>
-<p>数据类型与RDF Literals一同表示字符串、数字和日期等。</p>
-<p>数据类型由词汇空间、值空间和词汇到值的映射组成，并由一个或多个IRI表示。词汇空间是一组Unicode字符串。</p>
-<p>一个数据类型的词汇到值的映射是一组pair，其第一个元素属于该词汇空间，第二个元素属于该数据类型的值空间。该映射可以看做是<strong>从词汇空间到值空间的一个函数</strong>。</p>
-<p>使用 <code>xsd:boolean</code> 数据类型举例：</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/3_mqjjcq.png" /></p>
-<h4 id="xml架构内置数据类型">XML架构内置数据类型</h4>
-<p>下表列出的XML架构内置数据类型是与RDF相兼容的xsd类型：</p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/4_kzgkwh.png" /></p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/5_bgycak.png" /></p>
-<p><img src="https://res.cloudinary.com/dgmic3q9w/image/upload/v1629448317/Blog/RDF-2/6_dniw3a.png" /></p>
-<p>不与RDF相兼容的类型不予列出。</p>
-<h3 id="段标识符">段标识符</h3>
-<p>RDF使用可能包含段标识符的IRI作为资源标识符。段标识符的语义为：它们标识辅助资源，通常为主资源的视图、定义或描述的一部分。</p>
-<p>例如，在承载RDF表示的主资源 <code>&lt;foo&gt;</code> 中，由段标识符 <code>bar</code> 标识的辅助资源是由完整的IRI <code>&lt;foo#bar&gt;</code> 表示的资源。</p>
-<h3 id="广义rdf三元组图和数据集">广义RDF三元组、图和数据集</h3>
-<p>广义的RDF三元组是含有subject、predicate和object的三元组，其中每个元素都可能是IRI、空节点或Literal。</p>
-<p>广义RDF图是广义RDF三元组的集合。</p>
-<p>广义RDF数据集包括广义RDF图以及0或多个将IRI、空节点和Literal关联起来的pair。</p>
-<p>广义RDF三元组、图和数据集与规范RDF三元组、图和数据集不一样的地方仅在于IRI、空节点和Literal允许出现在任何位置，即包括subject、predicate、object或图名中。</p>
-<h3 id="结语">结语</h3>
-<p>RDF抽象语法这本读物中主要介绍了RDF图、数据类型等内容，并且给出了一些定义，让我对RDF基础有了更加深刻的理解。</p>
-]]></content>
-      <categories>
-        <category>语义搜索</category>
-      </categories>
-      <tags>
-        <tag>语义搜索</tag>
-        <tag>RDF</tag>
       </tags>
   </entry>
 </search>
